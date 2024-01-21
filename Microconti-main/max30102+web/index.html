@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Paramètres de Surveillance de la Santé</title>
+    <style>
+  
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        header {
+          background-color: cornflowerblue;
+          color: white;
+          padding: 10px;
+          text-align: center;
+        }
+        nav {
+          background-color: #f2f2f2;
+          overflow: hidden;
+         
+        }
+        nav a {
+          float: left;
+          display: block;
+          color: #355bbd;
+          text-align: center;
+          padding: 14px 20px;
+          text-decoration: none;
+        }
+        nav a:hover {
+          background-color: #355bbd;
+          color: black;
+        }
+        footer {
+          background-color: cornflowerblue;
+          color: white;
+          padding: 10px;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+        }
+        .image-footer {
+      position: absolute;
+      bottom: 30px; /* Ajustez cette valeur pour positionner verticalement */
+      right: 30px; /* Ajustez cette valeur pour positionner horizontalement */
+      width: 100px; /* Ajustez la largeur de l'image */
+      height: auto; /* Garantit que la hauteur s'adapte proportionnellement à la largeur */
+      border-radius: 5px; /* Facultatif : pour les coins arrondis */
+    }
+      </style>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function refreshData() {
+            fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('tempAmbiante').textContent = data.temperature + ' °C';
+                document.getElementById('humiditeAmbiante').textContent = data.humidity + ' %';
+                document.getElementById('tempCorporelle').textContent = data.bodyTemperature + ' °C';
+                document.getElementById('spo2').textContent = data.spo2 + ' %';
+                document.getElementById('rythmeCardiaque').textContent = data.heartRate + ' battements/minute';
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        setInterval(refreshData, 4000); // Refresh every 4 seconds
+    </script>
+</head>
+<body>
+    <header>
+        <h1 style="color: aliceblue;">SAUVETAGE ECM </h1>
+      </header>
+    <!-- Barre de navigation -->
+   <nav style="right: 0%;"> 
+    <a href="#accueil">Accueil</a>
+    <a href="#services">Services</a>
+    <a href="#produits">Produits</a>
+    <a href="#contact">Contact</a>
+      </nav>  
+    <main>  
+        <section id="parametres-surveillance">
+            <h1 style="color: cornflowerblue; ">Paramètres de Surveillance de la Santé</h1>
+        </section>
+        <section ><p>Température ambiante: <span id="tempAmbiante">XXX</span></p>
+        </section>
+        <section><p>Humidité ambiante: <span id="humiditeAmbiante">XXX</span></p>
+        </section>
+        <section><p>Température corporelle: <span id="tempCorporelle">XXX</span></p>
+        </section>
+        <section><p>SPO2 (Saturation en oxygène): <span id="spo2">XXX</span></p>
+        </section>
+        <section><p>Rythme cardiaque: <span id="rythmeCardiaque">XXX</span></p>
+        </section>
+    </main>
+    
+        <footer>
+        
+        <p style="color: aliceblue;">&copy; 2024_Sauvetage_ECM</p>
+      </footer>
+</body>
+</html>
